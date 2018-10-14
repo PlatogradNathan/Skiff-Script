@@ -1,0 +1,66 @@
+How to compile SkiffScript?
+In Windows NT environment:
+
+1)Get resource code of it;
+
+2)Start "bash" service (In Windows10,you can also download "Ubuntu" in Microsoft Store)
+
+3)Start a console (by doubleclick "!cons.bat")
+
+4)type "bash" in it
+
+5)compile Skiffscript.y and Skiffscript.l
+5.1)install bison and flex by type apt-get install bison and apt-get install flex
+5.2)type yacc -dv Skiffscript.y
+5.3)type lex Skiffscript.l
+
+6)Compile kernel
+6.1)install gcc
+6.2)type build
+
+7)Then you can run it by type skis
+
+Step 3 - 5:
+------------------------------------------------------
+Active code page: 437
+Microsoft Windows [Version 10.0.17134.286]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+D:\Project\Skiff Script>bash
+nathan@SURFACE-BOOK:/mnt/d/Project/Skiff Script$apt-get install bison
+(Some output)
+nathan@SURFACE-BOOK:/mnt/d/Project/Skiff Script$apt-get install flex
+(Some output)
+nathan@SURFACE-BOOK:/mnt/d/Project/Skiff Script$yacc -dv Skiffscript.y
+nathan@SURFACE-BOOK:/mnt/d/Project/Skiff Script$lex Skiffscript.l
+nathan@SURFACE-BOOK:/mnt/d/Project/Skiff Script$exit
+logout
+D:\Project\Skiff Script>_
+---------------------------------------------------------
+
+Step 6-7
+Active code page: 437
+Microsoft Windows [Version 10.0.17134.286]
+(c) 2018 Microsoft Corporation. All rights reserved.
+
+D:\Project\Skiff Script>build
+
+In file included from Skiffscript.l:10:0:
+y.tab.h:160:1: warning: no semicolon at end of struct or union
+ };
+ ^
+lex.yy.c:635:12: warning: prototype for 'yywrap' follows non-prototype definition
+ extern int yywrap (void );
+            ^
+y.tab.c:227:1: warning: no semicolon at end of struct or union
+ };
+ ^
+y.tab.c: In function 'yyparse':
+y.tab.c:1399:16: warning: implicit declaration of function 'yylex' [-Wimplicit-function-declaration]
+       yychar = yylex ();
+                ^
+Skiffscript.y:144:32: warning: assignment from incompatible pointer type [-Wincompatible-pointer-types]
+y.tab.c:2151:7: warning: implicit declaration of function 'yyerror' [-Wimplicit-function-declaration]
+       yyerror (YY_("syntax error"));
+       ^
+D:\Project\Skiff Script>skis script.txt

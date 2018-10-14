@@ -1,0 +1,1965 @@
+Terminals unused in grammar
+
+   GOTO
+
+
+State 4 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: line_list $end
+
+    1 line_list: line
+    2          | line_list line
+
+    3 line: expression SR
+    4     | FUNCTION IDENTIFIER LP paralist RP LC
+    5     | IF LP expression RP LC
+    6     | WHILE LP expression RP LC
+    7     | RC ELSE LC
+    8     | RC ELIF LP expression RP LC
+    9     | RC
+   10     | DO LC
+   11     | RC WHILE LP expression RP
+   12     | FOR LP expression SR expression SR expression RP LC
+   13     | FOR LP SR expression SR expression RP LC
+   14     | FOR LP SR SR expression RP LC
+   15     | FOR LP SR expression RP LC
+   16     | FOR LP SR SR RP LC
+   17     | FOR LP expression SR RP LC
+   18     | FOR LP expression SR SR expression RP LC
+   19     | FOR LP expression SR expression SR RP LC
+   20     | FUNCTION IDENTIFIER LP RP LC
+
+   21 paralist: expression
+   22         | paralist SN1 expression
+
+   23 expression: assign_expression
+   24           | VAR IDENTIFIER SN0 INTEGER
+   25           | VAR IDENTIFIER SN0 FLOAT
+   26           | VAR IDENTIFIER SN0 STRING_TYPE
+   27           | VAR IDENTIFIER SN0 BYTE
+   28           | VAR IDENTIFIER SN0 BOOLEAN
+   29           | VAR IDENTIFIER
+   30           | BREAK
+   31           | CONTINUE
+   32           | RETURN expression
+   33           | RETURN
+
+   34 assign_expression: logical_expression
+   35                  | IDENTIFIER EQU logical_expression
+
+   36 logical_expression: and_or_expression
+   37                   | logical_expression LOGICAL_AND and_or_expression
+   38                   | logical_expression LOGICAL_OR and_or_expression
+
+   39 and_or_expression: equ_expression
+   40                  | and_or_expression AND equ_expression
+   41                  | and_or_expression OR equ_expression
+
+   42 equ_expression: compare_expression
+   43               | equ_expression EQ compare_expression
+   44               | equ_expression NE compare_expression
+
+   45 compare_expression: add_expression
+   46                   | compare_expression GT add_expression
+   47                   | compare_expression GE add_expression
+   48                   | compare_expression LT add_expression
+   49                   | compare_expression LE add_expression
+
+   50 add_expression: term
+   51               | add_expression ADD term
+   52               | add_expression SUB term
+
+   53 term: primary
+   54     | term MUL primary
+   55     | term DIV primary
+   56     | term MOD primary
+
+   57 primary: REAL_CONSTANT
+   58        | INT_CONSTANT
+   59        | STRING_CONSTANT
+   60        | BOOLEAN_CONSTANT
+   61        | IDENTIFIER
+   62        | LP expression RP
+   63        | SUB primary
+   64        | NOT primary
+   65        | IDENTIFIER LP RP
+   66        | IDENTIFIER LP paralist RP
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+ADD (258) 51
+SUB (259) 52 63
+MUL (260) 54
+DIV (261) 55
+AND (262) 40
+OR (263) 41
+MOD (264) 56
+EQ (265) 43
+NE (266) 44
+GT (267) 46
+GE (268) 47
+LT (269) 48
+LE (270) 49
+LOGICAL_AND (271) 37
+LOGICAL_OR (272) 38
+NOT (273) 64
+SN0 (274) 24 25 26 27 28
+SR (275) 3 12 13 14 15 16 17 18 19
+EQU (276) 35
+LP (277) 4 5 6 8 11 12 13 14 15 16 17 18 19 20 62 65 66
+RP (278) 4 5 6 8 11 12 13 14 15 16 17 18 19 20 62 65 66
+SN1 (279) 22
+LC (280) 4 5 6 7 8 10 12 13 14 15 16 17 18 19 20
+RC (281) 7 8 9 11
+VAR (282) 24 25 26 27 28 29
+INTEGER (283) 24
+FLOAT (284) 25
+STRING_TYPE (285) 26
+BYTE (286) 27
+IF (287) 5
+BOOLEAN (288) 28
+ELSE (289) 7
+ELIF (290) 8
+DO (291) 10
+WHILE (292) 6 11
+GOTO (293)
+BREAK (294) 30
+CONTINUE (295) 31
+RETURN (296) 32 33
+FOR (297) 12 13 14 15 16 17 18 19
+FUNCTION (298) 4 20
+IDENTIFIER (299) 4 20 24 25 26 27 28 29 35 61 65 66
+REAL_CONSTANT (300) 57
+INT_CONSTANT (301) 58
+STRING_CONSTANT (302) 59
+BOOLEAN_CONSTANT (303) 60
+
+
+Nonterminals, with rules where they appear
+
+$accept (49)
+    on left: 0
+line_list (50)
+    on left: 1 2, on right: 0 2
+line (51)
+    on left: 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20, on right:
+    1 2
+paralist (52)
+    on left: 21 22, on right: 4 22 66
+expression (53)
+    on left: 23 24 25 26 27 28 29 30 31 32 33, on right: 3 5 6 8 11
+    12 13 14 15 17 18 19 21 22 32 62
+assign_expression (54)
+    on left: 34 35, on right: 23
+logical_expression (55)
+    on left: 36 37 38, on right: 34 35 37 38
+and_or_expression (56)
+    on left: 39 40 41, on right: 36 37 38 40 41
+equ_expression (57)
+    on left: 42 43 44, on right: 39 40 41 43 44
+compare_expression (58)
+    on left: 45 46 47 48 49, on right: 42 43 44 46 47 48 49
+add_expression (59)
+    on left: 50 51 52, on right: 45 46 47 48 49 51 52
+term (60)
+    on left: 53 54 55 56, on right: 50 51 52 54 55 56
+primary (61)
+    on left: 57 58 59 60 61 62 63 64 65 66, on right: 53 54 55 56 63
+    64
+
+
+State 0
+
+    0 $accept: . line_list $end
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    RC                shift, and go to state 4
+    VAR               shift, and go to state 5
+    IF                shift, and go to state 6
+    DO                shift, and go to state 7
+    WHILE             shift, and go to state 8
+    BREAK             shift, and go to state 9
+    CONTINUE          shift, and go to state 10
+    RETURN            shift, and go to state 11
+    FOR               shift, and go to state 12
+    FUNCTION          shift, and go to state 13
+    IDENTIFIER        shift, and go to state 14
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    line_list           go to state 19
+    line                go to state 20
+    expression          go to state 21
+    assign_expression   go to state 22
+    logical_expression  go to state 23
+    and_or_expression   go to state 24
+    equ_expression      go to state 25
+    compare_expression  go to state 26
+    add_expression      go to state 27
+    term                go to state 28
+    primary             go to state 29
+
+
+State 1
+
+   63 primary: SUB . primary
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    IDENTIFIER        shift, and go to state 30
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    primary  go to state 31
+
+
+State 2
+
+   64 primary: NOT . primary
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    IDENTIFIER        shift, and go to state 30
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    primary  go to state 32
+
+
+State 3
+
+   62 primary: LP . expression RP
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    VAR               shift, and go to state 5
+    BREAK             shift, and go to state 9
+    CONTINUE          shift, and go to state 10
+    RETURN            shift, and go to state 11
+    IDENTIFIER        shift, and go to state 14
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    expression          go to state 33
+    assign_expression   go to state 22
+    logical_expression  go to state 23
+    and_or_expression   go to state 24
+    equ_expression      go to state 25
+    compare_expression  go to state 26
+    add_expression      go to state 27
+    term                go to state 28
+    primary             go to state 29
+
+
+State 4
+
+    7 line: RC . ELSE LC
+    8     | RC . ELIF LP expression RP LC
+    9     | RC .
+   11     | RC . WHILE LP expression RP
+
+    ELSE   shift, and go to state 34
+    ELIF   shift, and go to state 35
+    WHILE  shift, and go to state 36
+
+    WHILE     [reduce using rule 9 (line)]
+    $default  reduce using rule 9 (line)
+
+
+State 5
+
+   24 expression: VAR . IDENTIFIER SN0 INTEGER
+   25           | VAR . IDENTIFIER SN0 FLOAT
+   26           | VAR . IDENTIFIER SN0 STRING_TYPE
+   27           | VAR . IDENTIFIER SN0 BYTE
+   28           | VAR . IDENTIFIER SN0 BOOLEAN
+   29           | VAR . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 37
+
+
+State 6
+
+    5 line: IF . LP expression RP LC
+
+    LP  shift, and go to state 38
+
+
+State 7
+
+   10 line: DO . LC
+
+    LC  shift, and go to state 39
+
+
+State 8
+
+    6 line: WHILE . LP expression RP LC
+
+    LP  shift, and go to state 40
+
+
+State 9
+
+   30 expression: BREAK .
+
+    $default  reduce using rule 30 (expression)
+
+
+State 10
+
+   31 expression: CONTINUE .
+
+    $default  reduce using rule 31 (expression)
+
+
+State 11
+
+   32 expression: RETURN . expression
+   33           | RETURN .
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    VAR               shift, and go to state 5
+    BREAK             shift, and go to state 9
+    CONTINUE          shift, and go to state 10
+    RETURN            shift, and go to state 11
+    IDENTIFIER        shift, and go to state 14
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    $default  reduce using rule 33 (expression)
+
+    expression          go to state 41
+    assign_expression   go to state 22
+    logical_expression  go to state 23
+    and_or_expression   go to state 24
+    equ_expression      go to state 25
+    compare_expression  go to state 26
+    add_expression      go to state 27
+    term                go to state 28
+    primary             go to state 29
+
+
+State 12
+
+   12 line: FOR . LP expression SR expression SR expression RP LC
+   13     | FOR . LP SR expression SR expression RP LC
+   14     | FOR . LP SR SR expression RP LC
+   15     | FOR . LP SR expression RP LC
+   16     | FOR . LP SR SR RP LC
+   17     | FOR . LP expression SR RP LC
+   18     | FOR . LP expression SR SR expression RP LC
+   19     | FOR . LP expression SR expression SR RP LC
+
+    LP  shift, and go to state 42
+
+
+State 13
+
+    4 line: FUNCTION . IDENTIFIER LP paralist RP LC
+   20     | FUNCTION . IDENTIFIER LP RP LC
+
+    IDENTIFIER  shift, and go to state 43
+
+
+State 14
+
+   35 assign_expression: IDENTIFIER . EQU logical_expression
+   61 primary: IDENTIFIER .
+   65        | IDENTIFIER . LP RP
+   66        | IDENTIFIER . LP paralist RP
+
+    EQU  shift, and go to state 44
+    LP   shift, and go to state 45
+
+    $default  reduce using rule 61 (primary)
+
+
+State 15
+
+   57 primary: REAL_CONSTANT .
+
+    $default  reduce using rule 57 (primary)
+
+
+State 16
+
+   58 primary: INT_CONSTANT .
+
+    $default  reduce using rule 58 (primary)
+
+
+State 17
+
+   59 primary: STRING_CONSTANT .
+
+    $default  reduce using rule 59 (primary)
+
+
+State 18
+
+   60 primary: BOOLEAN_CONSTANT .
+
+    $default  reduce using rule 60 (primary)
+
+
+State 19
+
+    0 $accept: line_list . $end
+    2 line_list: line_list . line
+
+    $end              shift, and go to state 46
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    RC                shift, and go to state 4
+    VAR               shift, and go to state 5
+    IF                shift, and go to state 6
+    DO                shift, and go to state 7
+    WHILE             shift, and go to state 8
+    BREAK             shift, and go to state 9
+    CONTINUE          shift, and go to state 10
+    RETURN            shift, and go to state 11
+    FOR               shift, and go to state 12
+    FUNCTION          shift, and go to state 13
+    IDENTIFIER        shift, and go to state 14
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    line                go to state 47
+    expression          go to state 21
+    assign_expression   go to state 22
+    logical_expression  go to state 23
+    and_or_expression   go to state 24
+    equ_expression      go to state 25
+    compare_expression  go to state 26
+    add_expression      go to state 27
+    term                go to state 28
+    primary             go to state 29
+
+
+State 20
+
+    1 line_list: line .
+
+    $default  reduce using rule 1 (line_list)
+
+
+State 21
+
+    3 line: expression . SR
+
+    SR  shift, and go to state 48
+
+
+State 22
+
+   23 expression: assign_expression .
+
+    $default  reduce using rule 23 (expression)
+
+
+State 23
+
+   34 assign_expression: logical_expression .
+   37 logical_expression: logical_expression . LOGICAL_AND and_or_expression
+   38                   | logical_expression . LOGICAL_OR and_or_expression
+
+    LOGICAL_AND  shift, and go to state 49
+    LOGICAL_OR   shift, and go to state 50
+
+    $default  reduce using rule 34 (assign_expression)
+
+
+State 24
+
+   36 logical_expression: and_or_expression .
+   40 and_or_expression: and_or_expression . AND equ_expression
+   41                  | and_or_expression . OR equ_expression
+
+    AND  shift, and go to state 51
+    OR   shift, and go to state 52
+
+    $default  reduce using rule 36 (logical_expression)
+
+
+State 25
+
+   39 and_or_expression: equ_expression .
+   43 equ_expression: equ_expression . EQ compare_expression
+   44               | equ_expression . NE compare_expression
+
+    EQ  shift, and go to state 53
+    NE  shift, and go to state 54
+
+    $default  reduce using rule 39 (and_or_expression)
+
+
+State 26
+
+   42 equ_expression: compare_expression .
+   46 compare_expression: compare_expression . GT add_expression
+   47                   | compare_expression . GE add_expression
+   48                   | compare_expression . LT add_expression
+   49                   | compare_expression . LE add_expression
+
+    GT  shift, and go to state 55
+    GE  shift, and go to state 56
+    LT  shift, and go to state 57
+    LE  shift, and go to state 58
+
+    $default  reduce using rule 42 (equ_expression)
+
+
+State 27
+
+   45 compare_expression: add_expression .
+   51 add_expression: add_expression . ADD term
+   52               | add_expression . SUB term
+
+    ADD  shift, and go to state 59
+    SUB  shift, and go to state 60
+
+    $default  reduce using rule 45 (compare_expression)
+
+
+State 28
+
+   50 add_expression: term .
+   54 term: term . MUL primary
+   55     | term . DIV primary
+   56     | term . MOD primary
+
+    MUL  shift, and go to state 61
+    DIV  shift, and go to state 62
+    MOD  shift, and go to state 63
+
+    $default  reduce using rule 50 (add_expression)
+
+
+State 29
+
+   53 term: primary .
+
+    $default  reduce using rule 53 (term)
+
+
+State 30
+
+   61 primary: IDENTIFIER .
+   65        | IDENTIFIER . LP RP
+   66        | IDENTIFIER . LP paralist RP
+
+    LP  shift, and go to state 45
+
+    $default  reduce using rule 61 (primary)
+
+
+State 31
+
+   63 primary: SUB primary .
+
+    $default  reduce using rule 63 (primary)
+
+
+State 32
+
+   64 primary: NOT primary .
+
+    $default  reduce using rule 64 (primary)
+
+
+State 33
+
+   62 primary: LP expression . RP
+
+    RP  shift, and go to state 64
+
+
+State 34
+
+    7 line: RC ELSE . LC
+
+    LC  shift, and go to state 65
+
+
+State 35
+
+    8 line: RC ELIF . LP expression RP LC
+
+    LP  shift, and go to state 66
+
+
+State 36
+
+   11 line: RC WHILE . LP expression RP
+
+    LP  shift, and go to state 67
+
+
+State 37
+
+   24 expression: VAR IDENTIFIER . SN0 INTEGER
+   25           | VAR IDENTIFIER . SN0 FLOAT
+   26           | VAR IDENTIFIER . SN0 STRING_TYPE
+   27           | VAR IDENTIFIER . SN0 BYTE
+   28           | VAR IDENTIFIER . SN0 BOOLEAN
+   29           | VAR IDENTIFIER .
+
+    SN0  shift, and go to state 68
+
+    $default  reduce using rule 29 (expression)
+
+
+State 38
+
+    5 line: IF LP . expression RP LC
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    VAR               shift, and go to state 5
+    BREAK             shift, and go to state 9
+    CONTINUE          shift, and go to state 10
+    RETURN            shift, and go to state 11
+    IDENTIFIER        shift, and go to state 14
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    expression          go to state 69
+    assign_expression   go to state 22
+    logical_expression  go to state 23
+    and_or_expression   go to state 24
+    equ_expression      go to state 25
+    compare_expression  go to state 26
+    add_expression      go to state 27
+    term                go to state 28
+    primary             go to state 29
+
+
+State 39
+
+   10 line: DO LC .
+
+    $default  reduce using rule 10 (line)
+
+
+State 40
+
+    6 line: WHILE LP . expression RP LC
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    VAR               shift, and go to state 5
+    BREAK             shift, and go to state 9
+    CONTINUE          shift, and go to state 10
+    RETURN            shift, and go to state 11
+    IDENTIFIER        shift, and go to state 14
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    expression          go to state 70
+    assign_expression   go to state 22
+    logical_expression  go to state 23
+    and_or_expression   go to state 24
+    equ_expression      go to state 25
+    compare_expression  go to state 26
+    add_expression      go to state 27
+    term                go to state 28
+    primary             go to state 29
+
+
+State 41
+
+   32 expression: RETURN expression .
+
+    $default  reduce using rule 32 (expression)
+
+
+State 42
+
+   12 line: FOR LP . expression SR expression SR expression RP LC
+   13     | FOR LP . SR expression SR expression RP LC
+   14     | FOR LP . SR SR expression RP LC
+   15     | FOR LP . SR expression RP LC
+   16     | FOR LP . SR SR RP LC
+   17     | FOR LP . expression SR RP LC
+   18     | FOR LP . expression SR SR expression RP LC
+   19     | FOR LP . expression SR expression SR RP LC
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    SR                shift, and go to state 71
+    LP                shift, and go to state 3
+    VAR               shift, and go to state 5
+    BREAK             shift, and go to state 9
+    CONTINUE          shift, and go to state 10
+    RETURN            shift, and go to state 11
+    IDENTIFIER        shift, and go to state 14
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    expression          go to state 72
+    assign_expression   go to state 22
+    logical_expression  go to state 23
+    and_or_expression   go to state 24
+    equ_expression      go to state 25
+    compare_expression  go to state 26
+    add_expression      go to state 27
+    term                go to state 28
+    primary             go to state 29
+
+
+State 43
+
+    4 line: FUNCTION IDENTIFIER . LP paralist RP LC
+   20     | FUNCTION IDENTIFIER . LP RP LC
+
+    LP  shift, and go to state 73
+
+
+State 44
+
+   35 assign_expression: IDENTIFIER EQU . logical_expression
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    IDENTIFIER        shift, and go to state 30
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    logical_expression  go to state 74
+    and_or_expression   go to state 24
+    equ_expression      go to state 25
+    compare_expression  go to state 26
+    add_expression      go to state 27
+    term                go to state 28
+    primary             go to state 29
+
+
+State 45
+
+   65 primary: IDENTIFIER LP . RP
+   66        | IDENTIFIER LP . paralist RP
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    RP                shift, and go to state 75
+    VAR               shift, and go to state 5
+    BREAK             shift, and go to state 9
+    CONTINUE          shift, and go to state 10
+    RETURN            shift, and go to state 11
+    IDENTIFIER        shift, and go to state 14
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    paralist            go to state 76
+    expression          go to state 77
+    assign_expression   go to state 22
+    logical_expression  go to state 23
+    and_or_expression   go to state 24
+    equ_expression      go to state 25
+    compare_expression  go to state 26
+    add_expression      go to state 27
+    term                go to state 28
+    primary             go to state 29
+
+
+State 46
+
+    0 $accept: line_list $end .
+
+    $default  accept
+
+
+State 47
+
+    2 line_list: line_list line .
+
+    $default  reduce using rule 2 (line_list)
+
+
+State 48
+
+    3 line: expression SR .
+
+    $default  reduce using rule 3 (line)
+
+
+State 49
+
+   37 logical_expression: logical_expression LOGICAL_AND . and_or_expression
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    IDENTIFIER        shift, and go to state 30
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    and_or_expression   go to state 78
+    equ_expression      go to state 25
+    compare_expression  go to state 26
+    add_expression      go to state 27
+    term                go to state 28
+    primary             go to state 29
+
+
+State 50
+
+   38 logical_expression: logical_expression LOGICAL_OR . and_or_expression
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    IDENTIFIER        shift, and go to state 30
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    and_or_expression   go to state 79
+    equ_expression      go to state 25
+    compare_expression  go to state 26
+    add_expression      go to state 27
+    term                go to state 28
+    primary             go to state 29
+
+
+State 51
+
+   40 and_or_expression: and_or_expression AND . equ_expression
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    IDENTIFIER        shift, and go to state 30
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    equ_expression      go to state 80
+    compare_expression  go to state 26
+    add_expression      go to state 27
+    term                go to state 28
+    primary             go to state 29
+
+
+State 52
+
+   41 and_or_expression: and_or_expression OR . equ_expression
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    IDENTIFIER        shift, and go to state 30
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    equ_expression      go to state 81
+    compare_expression  go to state 26
+    add_expression      go to state 27
+    term                go to state 28
+    primary             go to state 29
+
+
+State 53
+
+   43 equ_expression: equ_expression EQ . compare_expression
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    IDENTIFIER        shift, and go to state 30
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    compare_expression  go to state 82
+    add_expression      go to state 27
+    term                go to state 28
+    primary             go to state 29
+
+
+State 54
+
+   44 equ_expression: equ_expression NE . compare_expression
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    IDENTIFIER        shift, and go to state 30
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    compare_expression  go to state 83
+    add_expression      go to state 27
+    term                go to state 28
+    primary             go to state 29
+
+
+State 55
+
+   46 compare_expression: compare_expression GT . add_expression
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    IDENTIFIER        shift, and go to state 30
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    add_expression  go to state 84
+    term            go to state 28
+    primary         go to state 29
+
+
+State 56
+
+   47 compare_expression: compare_expression GE . add_expression
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    IDENTIFIER        shift, and go to state 30
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    add_expression  go to state 85
+    term            go to state 28
+    primary         go to state 29
+
+
+State 57
+
+   48 compare_expression: compare_expression LT . add_expression
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    IDENTIFIER        shift, and go to state 30
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    add_expression  go to state 86
+    term            go to state 28
+    primary         go to state 29
+
+
+State 58
+
+   49 compare_expression: compare_expression LE . add_expression
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    IDENTIFIER        shift, and go to state 30
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    add_expression  go to state 87
+    term            go to state 28
+    primary         go to state 29
+
+
+State 59
+
+   51 add_expression: add_expression ADD . term
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    IDENTIFIER        shift, and go to state 30
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    term     go to state 88
+    primary  go to state 29
+
+
+State 60
+
+   52 add_expression: add_expression SUB . term
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    IDENTIFIER        shift, and go to state 30
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    term     go to state 89
+    primary  go to state 29
+
+
+State 61
+
+   54 term: term MUL . primary
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    IDENTIFIER        shift, and go to state 30
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    primary  go to state 90
+
+
+State 62
+
+   55 term: term DIV . primary
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    IDENTIFIER        shift, and go to state 30
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    primary  go to state 91
+
+
+State 63
+
+   56 term: term MOD . primary
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    IDENTIFIER        shift, and go to state 30
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    primary  go to state 92
+
+
+State 64
+
+   62 primary: LP expression RP .
+
+    $default  reduce using rule 62 (primary)
+
+
+State 65
+
+    7 line: RC ELSE LC .
+
+    $default  reduce using rule 7 (line)
+
+
+State 66
+
+    8 line: RC ELIF LP . expression RP LC
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    VAR               shift, and go to state 5
+    BREAK             shift, and go to state 9
+    CONTINUE          shift, and go to state 10
+    RETURN            shift, and go to state 11
+    IDENTIFIER        shift, and go to state 14
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    expression          go to state 93
+    assign_expression   go to state 22
+    logical_expression  go to state 23
+    and_or_expression   go to state 24
+    equ_expression      go to state 25
+    compare_expression  go to state 26
+    add_expression      go to state 27
+    term                go to state 28
+    primary             go to state 29
+
+
+State 67
+
+   11 line: RC WHILE LP . expression RP
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    VAR               shift, and go to state 5
+    BREAK             shift, and go to state 9
+    CONTINUE          shift, and go to state 10
+    RETURN            shift, and go to state 11
+    IDENTIFIER        shift, and go to state 14
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    expression          go to state 94
+    assign_expression   go to state 22
+    logical_expression  go to state 23
+    and_or_expression   go to state 24
+    equ_expression      go to state 25
+    compare_expression  go to state 26
+    add_expression      go to state 27
+    term                go to state 28
+    primary             go to state 29
+
+
+State 68
+
+   24 expression: VAR IDENTIFIER SN0 . INTEGER
+   25           | VAR IDENTIFIER SN0 . FLOAT
+   26           | VAR IDENTIFIER SN0 . STRING_TYPE
+   27           | VAR IDENTIFIER SN0 . BYTE
+   28           | VAR IDENTIFIER SN0 . BOOLEAN
+
+    INTEGER      shift, and go to state 95
+    FLOAT        shift, and go to state 96
+    STRING_TYPE  shift, and go to state 97
+    BYTE         shift, and go to state 98
+    BOOLEAN      shift, and go to state 99
+
+
+State 69
+
+    5 line: IF LP expression . RP LC
+
+    RP  shift, and go to state 100
+
+
+State 70
+
+    6 line: WHILE LP expression . RP LC
+
+    RP  shift, and go to state 101
+
+
+State 71
+
+   13 line: FOR LP SR . expression SR expression RP LC
+   14     | FOR LP SR . SR expression RP LC
+   15     | FOR LP SR . expression RP LC
+   16     | FOR LP SR . SR RP LC
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    SR                shift, and go to state 102
+    LP                shift, and go to state 3
+    VAR               shift, and go to state 5
+    BREAK             shift, and go to state 9
+    CONTINUE          shift, and go to state 10
+    RETURN            shift, and go to state 11
+    IDENTIFIER        shift, and go to state 14
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    expression          go to state 103
+    assign_expression   go to state 22
+    logical_expression  go to state 23
+    and_or_expression   go to state 24
+    equ_expression      go to state 25
+    compare_expression  go to state 26
+    add_expression      go to state 27
+    term                go to state 28
+    primary             go to state 29
+
+
+State 72
+
+   12 line: FOR LP expression . SR expression SR expression RP LC
+   17     | FOR LP expression . SR RP LC
+   18     | FOR LP expression . SR SR expression RP LC
+   19     | FOR LP expression . SR expression SR RP LC
+
+    SR  shift, and go to state 104
+
+
+State 73
+
+    4 line: FUNCTION IDENTIFIER LP . paralist RP LC
+   20     | FUNCTION IDENTIFIER LP . RP LC
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    RP                shift, and go to state 105
+    VAR               shift, and go to state 5
+    BREAK             shift, and go to state 9
+    CONTINUE          shift, and go to state 10
+    RETURN            shift, and go to state 11
+    IDENTIFIER        shift, and go to state 14
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    paralist            go to state 106
+    expression          go to state 77
+    assign_expression   go to state 22
+    logical_expression  go to state 23
+    and_or_expression   go to state 24
+    equ_expression      go to state 25
+    compare_expression  go to state 26
+    add_expression      go to state 27
+    term                go to state 28
+    primary             go to state 29
+
+
+State 74
+
+   35 assign_expression: IDENTIFIER EQU logical_expression .
+   37 logical_expression: logical_expression . LOGICAL_AND and_or_expression
+   38                   | logical_expression . LOGICAL_OR and_or_expression
+
+    LOGICAL_AND  shift, and go to state 49
+    LOGICAL_OR   shift, and go to state 50
+
+    $default  reduce using rule 35 (assign_expression)
+
+
+State 75
+
+   65 primary: IDENTIFIER LP RP .
+
+    $default  reduce using rule 65 (primary)
+
+
+State 76
+
+   22 paralist: paralist . SN1 expression
+   66 primary: IDENTIFIER LP paralist . RP
+
+    RP   shift, and go to state 107
+    SN1  shift, and go to state 108
+
+
+State 77
+
+   21 paralist: expression .
+
+    $default  reduce using rule 21 (paralist)
+
+
+State 78
+
+   37 logical_expression: logical_expression LOGICAL_AND and_or_expression .
+   40 and_or_expression: and_or_expression . AND equ_expression
+   41                  | and_or_expression . OR equ_expression
+
+    AND  shift, and go to state 51
+    OR   shift, and go to state 52
+
+    $default  reduce using rule 37 (logical_expression)
+
+
+State 79
+
+   38 logical_expression: logical_expression LOGICAL_OR and_or_expression .
+   40 and_or_expression: and_or_expression . AND equ_expression
+   41                  | and_or_expression . OR equ_expression
+
+    AND  shift, and go to state 51
+    OR   shift, and go to state 52
+
+    $default  reduce using rule 38 (logical_expression)
+
+
+State 80
+
+   40 and_or_expression: and_or_expression AND equ_expression .
+   43 equ_expression: equ_expression . EQ compare_expression
+   44               | equ_expression . NE compare_expression
+
+    EQ  shift, and go to state 53
+    NE  shift, and go to state 54
+
+    $default  reduce using rule 40 (and_or_expression)
+
+
+State 81
+
+   41 and_or_expression: and_or_expression OR equ_expression .
+   43 equ_expression: equ_expression . EQ compare_expression
+   44               | equ_expression . NE compare_expression
+
+    EQ  shift, and go to state 53
+    NE  shift, and go to state 54
+
+    $default  reduce using rule 41 (and_or_expression)
+
+
+State 82
+
+   43 equ_expression: equ_expression EQ compare_expression .
+   46 compare_expression: compare_expression . GT add_expression
+   47                   | compare_expression . GE add_expression
+   48                   | compare_expression . LT add_expression
+   49                   | compare_expression . LE add_expression
+
+    GT  shift, and go to state 55
+    GE  shift, and go to state 56
+    LT  shift, and go to state 57
+    LE  shift, and go to state 58
+
+    $default  reduce using rule 43 (equ_expression)
+
+
+State 83
+
+   44 equ_expression: equ_expression NE compare_expression .
+   46 compare_expression: compare_expression . GT add_expression
+   47                   | compare_expression . GE add_expression
+   48                   | compare_expression . LT add_expression
+   49                   | compare_expression . LE add_expression
+
+    GT  shift, and go to state 55
+    GE  shift, and go to state 56
+    LT  shift, and go to state 57
+    LE  shift, and go to state 58
+
+    $default  reduce using rule 44 (equ_expression)
+
+
+State 84
+
+   46 compare_expression: compare_expression GT add_expression .
+   51 add_expression: add_expression . ADD term
+   52               | add_expression . SUB term
+
+    ADD  shift, and go to state 59
+    SUB  shift, and go to state 60
+
+    $default  reduce using rule 46 (compare_expression)
+
+
+State 85
+
+   47 compare_expression: compare_expression GE add_expression .
+   51 add_expression: add_expression . ADD term
+   52               | add_expression . SUB term
+
+    ADD  shift, and go to state 59
+    SUB  shift, and go to state 60
+
+    $default  reduce using rule 47 (compare_expression)
+
+
+State 86
+
+   48 compare_expression: compare_expression LT add_expression .
+   51 add_expression: add_expression . ADD term
+   52               | add_expression . SUB term
+
+    ADD  shift, and go to state 59
+    SUB  shift, and go to state 60
+
+    $default  reduce using rule 48 (compare_expression)
+
+
+State 87
+
+   49 compare_expression: compare_expression LE add_expression .
+   51 add_expression: add_expression . ADD term
+   52               | add_expression . SUB term
+
+    ADD  shift, and go to state 59
+    SUB  shift, and go to state 60
+
+    $default  reduce using rule 49 (compare_expression)
+
+
+State 88
+
+   51 add_expression: add_expression ADD term .
+   54 term: term . MUL primary
+   55     | term . DIV primary
+   56     | term . MOD primary
+
+    MUL  shift, and go to state 61
+    DIV  shift, and go to state 62
+    MOD  shift, and go to state 63
+
+    $default  reduce using rule 51 (add_expression)
+
+
+State 89
+
+   52 add_expression: add_expression SUB term .
+   54 term: term . MUL primary
+   55     | term . DIV primary
+   56     | term . MOD primary
+
+    MUL  shift, and go to state 61
+    DIV  shift, and go to state 62
+    MOD  shift, and go to state 63
+
+    $default  reduce using rule 52 (add_expression)
+
+
+State 90
+
+   54 term: term MUL primary .
+
+    $default  reduce using rule 54 (term)
+
+
+State 91
+
+   55 term: term DIV primary .
+
+    $default  reduce using rule 55 (term)
+
+
+State 92
+
+   56 term: term MOD primary .
+
+    $default  reduce using rule 56 (term)
+
+
+State 93
+
+    8 line: RC ELIF LP expression . RP LC
+
+    RP  shift, and go to state 109
+
+
+State 94
+
+   11 line: RC WHILE LP expression . RP
+
+    RP  shift, and go to state 110
+
+
+State 95
+
+   24 expression: VAR IDENTIFIER SN0 INTEGER .
+
+    $default  reduce using rule 24 (expression)
+
+
+State 96
+
+   25 expression: VAR IDENTIFIER SN0 FLOAT .
+
+    $default  reduce using rule 25 (expression)
+
+
+State 97
+
+   26 expression: VAR IDENTIFIER SN0 STRING_TYPE .
+
+    $default  reduce using rule 26 (expression)
+
+
+State 98
+
+   27 expression: VAR IDENTIFIER SN0 BYTE .
+
+    $default  reduce using rule 27 (expression)
+
+
+State 99
+
+   28 expression: VAR IDENTIFIER SN0 BOOLEAN .
+
+    $default  reduce using rule 28 (expression)
+
+
+State 100
+
+    5 line: IF LP expression RP . LC
+
+    LC  shift, and go to state 111
+
+
+State 101
+
+    6 line: WHILE LP expression RP . LC
+
+    LC  shift, and go to state 112
+
+
+State 102
+
+   14 line: FOR LP SR SR . expression RP LC
+   16     | FOR LP SR SR . RP LC
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    RP                shift, and go to state 113
+    VAR               shift, and go to state 5
+    BREAK             shift, and go to state 9
+    CONTINUE          shift, and go to state 10
+    RETURN            shift, and go to state 11
+    IDENTIFIER        shift, and go to state 14
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    expression          go to state 114
+    assign_expression   go to state 22
+    logical_expression  go to state 23
+    and_or_expression   go to state 24
+    equ_expression      go to state 25
+    compare_expression  go to state 26
+    add_expression      go to state 27
+    term                go to state 28
+    primary             go to state 29
+
+
+State 103
+
+   13 line: FOR LP SR expression . SR expression RP LC
+   15     | FOR LP SR expression . RP LC
+
+    SR  shift, and go to state 115
+    RP  shift, and go to state 116
+
+
+State 104
+
+   12 line: FOR LP expression SR . expression SR expression RP LC
+   17     | FOR LP expression SR . RP LC
+   18     | FOR LP expression SR . SR expression RP LC
+   19     | FOR LP expression SR . expression SR RP LC
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    SR                shift, and go to state 117
+    LP                shift, and go to state 3
+    RP                shift, and go to state 118
+    VAR               shift, and go to state 5
+    BREAK             shift, and go to state 9
+    CONTINUE          shift, and go to state 10
+    RETURN            shift, and go to state 11
+    IDENTIFIER        shift, and go to state 14
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    expression          go to state 119
+    assign_expression   go to state 22
+    logical_expression  go to state 23
+    and_or_expression   go to state 24
+    equ_expression      go to state 25
+    compare_expression  go to state 26
+    add_expression      go to state 27
+    term                go to state 28
+    primary             go to state 29
+
+
+State 105
+
+   20 line: FUNCTION IDENTIFIER LP RP . LC
+
+    LC  shift, and go to state 120
+
+
+State 106
+
+    4 line: FUNCTION IDENTIFIER LP paralist . RP LC
+   22 paralist: paralist . SN1 expression
+
+    RP   shift, and go to state 121
+    SN1  shift, and go to state 108
+
+
+State 107
+
+   66 primary: IDENTIFIER LP paralist RP .
+
+    $default  reduce using rule 66 (primary)
+
+
+State 108
+
+   22 paralist: paralist SN1 . expression
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    VAR               shift, and go to state 5
+    BREAK             shift, and go to state 9
+    CONTINUE          shift, and go to state 10
+    RETURN            shift, and go to state 11
+    IDENTIFIER        shift, and go to state 14
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    expression          go to state 122
+    assign_expression   go to state 22
+    logical_expression  go to state 23
+    and_or_expression   go to state 24
+    equ_expression      go to state 25
+    compare_expression  go to state 26
+    add_expression      go to state 27
+    term                go to state 28
+    primary             go to state 29
+
+
+State 109
+
+    8 line: RC ELIF LP expression RP . LC
+
+    LC  shift, and go to state 123
+
+
+State 110
+
+   11 line: RC WHILE LP expression RP .
+
+    $default  reduce using rule 11 (line)
+
+
+State 111
+
+    5 line: IF LP expression RP LC .
+
+    $default  reduce using rule 5 (line)
+
+
+State 112
+
+    6 line: WHILE LP expression RP LC .
+
+    $default  reduce using rule 6 (line)
+
+
+State 113
+
+   16 line: FOR LP SR SR RP . LC
+
+    LC  shift, and go to state 124
+
+
+State 114
+
+   14 line: FOR LP SR SR expression . RP LC
+
+    RP  shift, and go to state 125
+
+
+State 115
+
+   13 line: FOR LP SR expression SR . expression RP LC
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    VAR               shift, and go to state 5
+    BREAK             shift, and go to state 9
+    CONTINUE          shift, and go to state 10
+    RETURN            shift, and go to state 11
+    IDENTIFIER        shift, and go to state 14
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    expression          go to state 126
+    assign_expression   go to state 22
+    logical_expression  go to state 23
+    and_or_expression   go to state 24
+    equ_expression      go to state 25
+    compare_expression  go to state 26
+    add_expression      go to state 27
+    term                go to state 28
+    primary             go to state 29
+
+
+State 116
+
+   15 line: FOR LP SR expression RP . LC
+
+    LC  shift, and go to state 127
+
+
+State 117
+
+   18 line: FOR LP expression SR SR . expression RP LC
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    VAR               shift, and go to state 5
+    BREAK             shift, and go to state 9
+    CONTINUE          shift, and go to state 10
+    RETURN            shift, and go to state 11
+    IDENTIFIER        shift, and go to state 14
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    expression          go to state 128
+    assign_expression   go to state 22
+    logical_expression  go to state 23
+    and_or_expression   go to state 24
+    equ_expression      go to state 25
+    compare_expression  go to state 26
+    add_expression      go to state 27
+    term                go to state 28
+    primary             go to state 29
+
+
+State 118
+
+   17 line: FOR LP expression SR RP . LC
+
+    LC  shift, and go to state 129
+
+
+State 119
+
+   12 line: FOR LP expression SR expression . SR expression RP LC
+   19     | FOR LP expression SR expression . SR RP LC
+
+    SR  shift, and go to state 130
+
+
+State 120
+
+   20 line: FUNCTION IDENTIFIER LP RP LC .
+
+    $default  reduce using rule 20 (line)
+
+
+State 121
+
+    4 line: FUNCTION IDENTIFIER LP paralist RP . LC
+
+    LC  shift, and go to state 131
+
+
+State 122
+
+   22 paralist: paralist SN1 expression .
+
+    $default  reduce using rule 22 (paralist)
+
+
+State 123
+
+    8 line: RC ELIF LP expression RP LC .
+
+    $default  reduce using rule 8 (line)
+
+
+State 124
+
+   16 line: FOR LP SR SR RP LC .
+
+    $default  reduce using rule 16 (line)
+
+
+State 125
+
+   14 line: FOR LP SR SR expression RP . LC
+
+    LC  shift, and go to state 132
+
+
+State 126
+
+   13 line: FOR LP SR expression SR expression . RP LC
+
+    RP  shift, and go to state 133
+
+
+State 127
+
+   15 line: FOR LP SR expression RP LC .
+
+    $default  reduce using rule 15 (line)
+
+
+State 128
+
+   18 line: FOR LP expression SR SR expression . RP LC
+
+    RP  shift, and go to state 134
+
+
+State 129
+
+   17 line: FOR LP expression SR RP LC .
+
+    $default  reduce using rule 17 (line)
+
+
+State 130
+
+   12 line: FOR LP expression SR expression SR . expression RP LC
+   19     | FOR LP expression SR expression SR . RP LC
+
+    SUB               shift, and go to state 1
+    NOT               shift, and go to state 2
+    LP                shift, and go to state 3
+    RP                shift, and go to state 135
+    VAR               shift, and go to state 5
+    BREAK             shift, and go to state 9
+    CONTINUE          shift, and go to state 10
+    RETURN            shift, and go to state 11
+    IDENTIFIER        shift, and go to state 14
+    REAL_CONSTANT     shift, and go to state 15
+    INT_CONSTANT      shift, and go to state 16
+    STRING_CONSTANT   shift, and go to state 17
+    BOOLEAN_CONSTANT  shift, and go to state 18
+
+    expression          go to state 136
+    assign_expression   go to state 22
+    logical_expression  go to state 23
+    and_or_expression   go to state 24
+    equ_expression      go to state 25
+    compare_expression  go to state 26
+    add_expression      go to state 27
+    term                go to state 28
+    primary             go to state 29
+
+
+State 131
+
+    4 line: FUNCTION IDENTIFIER LP paralist RP LC .
+
+    $default  reduce using rule 4 (line)
+
+
+State 132
+
+   14 line: FOR LP SR SR expression RP LC .
+
+    $default  reduce using rule 14 (line)
+
+
+State 133
+
+   13 line: FOR LP SR expression SR expression RP . LC
+
+    LC  shift, and go to state 137
+
+
+State 134
+
+   18 line: FOR LP expression SR SR expression RP . LC
+
+    LC  shift, and go to state 138
+
+
+State 135
+
+   19 line: FOR LP expression SR expression SR RP . LC
+
+    LC  shift, and go to state 139
+
+
+State 136
+
+   12 line: FOR LP expression SR expression SR expression . RP LC
+
+    RP  shift, and go to state 140
+
+
+State 137
+
+   13 line: FOR LP SR expression SR expression RP LC .
+
+    $default  reduce using rule 13 (line)
+
+
+State 138
+
+   18 line: FOR LP expression SR SR expression RP LC .
+
+    $default  reduce using rule 18 (line)
+
+
+State 139
+
+   19 line: FOR LP expression SR expression SR RP LC .
+
+    $default  reduce using rule 19 (line)
+
+
+State 140
+
+   12 line: FOR LP expression SR expression SR expression RP . LC
+
+    LC  shift, and go to state 141
+
+
+State 141
+
+   12 line: FOR LP expression SR expression SR expression RP LC .
+
+    $default  reduce using rule 12 (line)

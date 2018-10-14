@@ -1,0 +1,30 @@
+var num1:integer;
+var num2:integer;
+var result:integer;
+function pow(a,b)
+{
+    var i;
+
+    var r:integer;
+
+    puts("Started...");
+    r = a;
+    if (b == 0) 
+    {
+        return 1;
+    }
+    puts("for...");
+    for(i = 1;i < b;i = i+1) {
+        a = a*r;
+    }
+    puts("return...");
+    return a;
+}
+function powx(a,b)
+{
+    return pow(a,b);
+}
+num1 = inputInt("input the number 1:");
+num2 = inputInt("input the number 2:");
+result = powx(num1,num2);
+puts(num1 + "^" + num2 + " is:" + result);
